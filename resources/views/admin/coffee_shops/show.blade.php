@@ -1,33 +1,54 @@
 @extends('admin.layout')
 
-@section('title', 'Coffee Shop Details')
+@section('title', 'Просмотр кофейни')
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <h5>Coffee Shop Details</h5>
+    <h2 style="margin-bottom: 2rem;">Информация о кофейне</h2>
+    
+    <div class="form-group">
+        <label class="form-label">ID:</label>
+        <div>{{ $coffeeShop->id_coffee_shop }}</div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <p><strong>ID:</strong> {{ $coffeeShop->id_coffee_shop }}</p>
-                <p><strong>Name:</strong> {{ $coffeeShop->name_coffee_shop }}</p>
-                <p><strong>Address:</strong> {{ $coffeeShop->address_coffeeshop }}</p>
-                <p><strong>City:</strong> {{ $coffeeShop->city->name_city }}</p>
-                <p><strong>Phone:</strong> {{ $coffeeShop->phone_coffeeshop }}</p>
-                <p><strong>Opening Hours:</strong> {{ $coffeeShop->opening_hours_coffeeshop }}</p>
-            </div>
-        </div>
-        
-        <div class="mt-4">
-            <h6>Coffee Menu Items: {{ $coffeeShop->coffeeMenus->count() }}</h6>
-            <h6>Menu Sweets: {{ $coffeeShop->menuSweets->count() }}</h6>
-        </div>
-        
-        <div class="mt-3">
-            <a href="{{ route('admin.coffee-shops.edit', $coffeeShop) }}" class="btn btn-warning">Edit</a>
-            <a href="{{ route('admin.coffee-shops.index') }}" class="btn btn-secondary">Back to List</a>
-        </div>
+    
+    <div class="form-group">
+        <label class="form-label">Название:</label>
+        <div>{{ $coffeeShop->name_coffee_shop }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Адрес:</label>
+        <div>{{ $coffeeShop->address_coffeeshop }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Город:</label>
+        <div>{{ $coffeeShop->city->name_city }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Телефон:</label>
+        <div>{{ $coffeeShop->phone_coffeeshop }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Часы работы:</label>
+        <div>{{ $coffeeShop->opening_hours_coffeeshop }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Позиций кофе:</label>
+        <div>{{ $coffeeShop->coffeeMenus->count() }}</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Десертов:</label>
+        <div>{{ $coffeeShop->menuSweets->count() }}</div>
+    </div>
+    
+    <div class="d-flex gap-2 mt-3">
+        <a href="{{ route('admin.coffee-shops.edit', $coffeeShop) }}" class="btn btn-warning">Редактировать</a>
+        <a href="{{ route('admin.coffee-shops.index') }}" class="btn btn-primary">Назад к списку</a>
     </div>
 </div>
 @endsection

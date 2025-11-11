@@ -11,6 +11,7 @@ class CoffeeMenu extends Model
 
     protected $table = 'coffee_menu';
     protected $primaryKey = 'id_coffee';
+    public $timestamps = false;
 
     protected $fillable = [
         'name_coffee', 

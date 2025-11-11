@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $cities = City::all();
@@ -22,15 +27,15 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_city' => 'required|string|max:145', // Исправлено на name_city
+            'name_city' => 'required|string|max:145',
         ]);
 
         City::create([
-            'name_city' => $request->name_city // Исправлено на name_city
+            'name_city' => $request->name_city
         ]);
 
         return redirect()->route('admin.cities.index')
-            ->with('success', 'City created successfully.');
+            ->with('success', 'Город успешно создан.');
     }
 
     public function show(City $city)
@@ -46,15 +51,15 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         $request->validate([
-            'name_city' => 'required|string|max:145', // Исправлено на name_city
+            'name_city' => 'required|string|max:145',
         ]);
 
         $city->update([
-            'name_city' => $request->name_city // Исправлено на name_city
+            'name_city' => $request->name_city
         ]);
 
         return redirect()->route('admin.cities.index')
-            ->with('success', 'City updated successfully.');
+            ->with('success', 'Город успешно обновлен.');
     }
 
     public function destroy(City $city)
@@ -62,6 +67,6 @@ class CityController extends Controller
         $city->delete();
 
         return redirect()->route('admin.cities.index')
-            ->with('success', 'City deleted successfully.');
+            ->with('success', 'Город успешно удален.');
     }
 }

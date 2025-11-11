@@ -11,6 +11,7 @@ class CoffeeShop extends Model
 
     protected $table = 'coffee_shop';
     protected $primaryKey = 'id_coffee_shop';
+    public $timestamps = false;
 
     protected $fillable = [
         'name_coffee_shop', 

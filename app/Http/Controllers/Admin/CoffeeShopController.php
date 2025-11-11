@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CoffeeShopController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $coffeeShops = CoffeeShop::with('city')->get();
@@ -24,11 +29,11 @@ class CoffeeShopController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_coffee_shop' => 'required|string|max:145', // Исправлено
-            'address_coffeeshop' => 'required|string|max:255', // Исправлено
-            'city_coffeeshop_bd' => 'required|exists:city,id_city', // Исправлено
-            'phone_coffeeshop' => 'required|string|max:100', // Исправлено
-            'opening_hours_coffeeshop' => 'required|string|max:100', // Исправлено
+            'name_coffee_shop' => 'required|string|max:145',
+            'address_coffeeshop' => 'required|string|max:255',
+            'city_coffeeshop_bd' => 'required|exists:city,id_city',
+            'phone_coffeeshop' => 'required|string|max:100',
+            'opening_hours_coffeeshop' => 'required|string|max:100',
         ]);
 
         CoffeeShop::create([
@@ -40,7 +45,7 @@ class CoffeeShopController extends Controller
         ]);
 
         return redirect()->route('admin.coffee-shops.index')
-            ->with('success', 'Coffee shop created successfully.');
+            ->with('success', 'Кофейня успешно создана.');
     }
 
     public function show(CoffeeShop $coffeeShop)
@@ -74,7 +79,7 @@ class CoffeeShopController extends Controller
         ]);
 
         return redirect()->route('admin.coffee-shops.index')
-            ->with('success', 'Coffee shop updated successfully.');
+            ->with('success', 'Кофейня успешно обновлена.');
     }
 
     public function destroy(CoffeeShop $coffeeShop)
@@ -82,6 +87,6 @@ class CoffeeShopController extends Controller
         $coffeeShop->delete();
 
         return redirect()->route('admin.coffee-shops.index')
-            ->with('success', 'Coffee shop deleted successfully.');
+            ->with('success', 'Кофейня успешно удалена.');
     }
 }

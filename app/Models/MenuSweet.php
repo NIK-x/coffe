@@ -11,6 +11,7 @@ class MenuSweet extends Model
 
     protected $table = 'menu_sweet';
     protected $primaryKey = 'id_sweet';
+    public $timestamps = false;
 
     protected $fillable = [
         'name_sweet', 

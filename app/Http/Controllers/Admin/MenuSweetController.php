@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class MenuSweetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $menuSweets = MenuSweet::with('coffeeShop')->get();
@@ -24,10 +29,10 @@ class MenuSweetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_sweet' => 'required|string|max:155', // Исправлено
-            'description_sweet' => 'required|string', // Исправлено
-            'price_sweet' => 'required|numeric|min:0', // Исправлено
-            'coffeeshop_sweet_bd' => 'required|exists:coffee_shop,id_coffee_shop', // Исправлено
+            'name_sweet' => 'required|string|max:155',
+            'description_sweet' => 'required|string',
+            'price_sweet' => 'required|numeric|min:0',
+            'coffeeshop_sweet_bd' => 'required|exists:coffee_shop,id_coffee_shop',
         ]);
 
         MenuSweet::create([
@@ -38,7 +43,7 @@ class MenuSweetController extends Controller
         ]);
 
         return redirect()->route('admin.menu-sweets.index')
-            ->with('success', 'Menu sweet item created successfully.');
+            ->with('success', 'Десерт успешно создан.');
     }
 
     public function show(MenuSweet $menuSweet)
@@ -70,7 +75,7 @@ class MenuSweetController extends Controller
         ]);
 
         return redirect()->route('admin.menu-sweets.index')
-            ->with('success', 'Menu sweet item updated successfully.');
+            ->with('success', 'Десерт успешно обновлен.');
     }
 
     public function destroy(MenuSweet $menuSweet)
@@ -78,6 +83,6 @@ class MenuSweetController extends Controller
         $menuSweet->delete();
 
         return redirect()->route('admin.menu-sweets.index')
-            ->with('success', 'Menu sweet item deleted successfully.');
+            ->with('success', 'Десерт успешно удален.');
     }
 }

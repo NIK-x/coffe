@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CoffeeMenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $coffeeMenus = CoffeeMenu::with('coffeeShop')->get();
@@ -24,10 +29,10 @@ class CoffeeMenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_coffee' => 'required|string|max:150', // Исправлено
-            'description_coffee' => 'required|string', // Исправлено
-            'price_coffee' => 'required|numeric|min:0', // Исправлено
-            'address_coffee_bd' => 'required|exists:coffee_shop,id_coffee_shop', // Исправлено
+            'name_coffee' => 'required|string|max:150',
+            'description_coffee' => 'required|string',
+            'price_coffee' => 'required|numeric|min:0',
+            'address_coffee_bd' => 'required|exists:coffee_shop,id_coffee_shop',
         ]);
 
         CoffeeMenu::create([
@@ -38,7 +43,7 @@ class CoffeeMenuController extends Controller
         ]);
 
         return redirect()->route('admin.coffee-menus.index')
-            ->with('success', 'Coffee menu item created successfully.');
+            ->with('success', 'Позиция кофе успешно создана.');
     }
 
     public function show(CoffeeMenu $coffeeMenu)
@@ -70,7 +75,7 @@ class CoffeeMenuController extends Controller
         ]);
 
         return redirect()->route('admin.coffee-menus.index')
-            ->with('success', 'Coffee menu item updated successfully.');
+            ->with('success', 'Позиция кофе успешно обновлена.');
     }
 
     public function destroy(CoffeeMenu $coffeeMenu)
@@ -78,6 +83,6 @@ class CoffeeMenuController extends Controller
         $coffeeMenu->delete();
 
         return redirect()->route('admin.coffee-menus.index')
-            ->with('success', 'Coffee menu item deleted successfully.');
+            ->with('success', 'Позиция кофе успешно удалена.');
     }
 }

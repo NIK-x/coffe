@@ -11,22 +11,9 @@ class City extends Model
 
     protected $table = 'city';
     protected $primaryKey = 'id_city';
+    public $timestamps = false;
 
     protected $fillable = ['name_city'];
-
-    // Отключаем автоматическую проверку уникальности при создании
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            // Временно отключаем проверку уникальности
-        });
-
-        static::updating(function ($model) {
-            // Временно отключаем проверку уникальности
-        });
-    }
 
     public function coffeeShops()
     {
